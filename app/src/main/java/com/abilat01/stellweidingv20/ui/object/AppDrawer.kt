@@ -6,6 +6,10 @@ import android.widget.Toolbar
 import androidx.appcompat.app.AppCompatActivity
 import com.abilat01.stellweidingv20.MainActivity
 import com.abilat01.stellweidingv20.R
+import com.abilat01.stellweidingv20.ui.fragments.ExercisesFragment
+import com.abilat01.stellweidingv20.ui.fragments.InfoFragment
+import com.abilat01.stellweidingv20.ui.fragments.ProgramFragment
+import com.abilat01.stellweidingv20.ui.fragments.WarmupFragment
 import com.mikepenz.materialdrawer.AccountHeader
 import com.mikepenz.materialdrawer.AccountHeaderBuilder
 import com.mikepenz.materialdrawer.Drawer
@@ -14,12 +18,15 @@ import com.mikepenz.materialdrawer.model.PrimaryDrawerItem
 import com.mikepenz.materialdrawer.model.ProfileDrawerItem
 import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem
 
-class AppDrawer(val mainActivity: AppCompatActivity, val toolbar: androidx.appcompat.widget.Toolbar) {
+class AppDrawer(
+    val mainActivity: AppCompatActivity,
+    val toolbar: androidx.appcompat.widget.Toolbar
+) {
 
     private lateinit var mDraver: Drawer
     private lateinit var mHeader: AccountHeader
 
-    fun create(){
+    fun create() {
         createHeader()
         createDrawer()
     }
@@ -57,13 +64,34 @@ class AppDrawer(val mainActivity: AppCompatActivity, val toolbar: androidx.appco
                     .withIcon(R.drawable.logout)
                     .withName("Выход")
                     .withSelectable(false)
-            ).withOnDrawerItemClickListener(object : Drawer.OnDrawerItemClickListener{
+            ).withOnDrawerItemClickListener(object : Drawer.OnDrawerItemClickListener {
                 override fun onItemClick(
                     view: View?,
                     position: Int,
                     drawerItem: IDrawerItem<*>
                 ): Boolean {
-                    Toast.makeText(mainActivity.applicationContext, position.toString(), Toast.LENGTH_SHORT).show()
+                    when (position) {
+                        1 -> mainActivity.supportFragmentManager.beginTransaction()
+                            .addToBackStack(null)//Быстрый возрат
+                            .replace(
+                                R.id.dataContainer, WarmupFragment()
+                            ).commit()
+                        2 -> mainActivity.supportFragmentManager.beginTransaction()
+                            .addToBackStack(null)
+                            .replace(
+                                R.id.dataContainer, ProgramFragment()
+                            ).commit()
+                        3 -> mainActivity.supportFragmentManager.beginTransaction()
+                            .addToBackStack(null)
+                            .replace(
+                                R.id.dataContainer, ExercisesFragment()
+                            ).commit()
+                        4 -> mainActivity.supportFragmentManager.beginTransaction()
+                            .addToBackStack(null)
+                            .replace(R.id.dataContainer, InfoFragment()
+                            ).commit()
+                            5-> mainActivity.finish()
+                    }
                     return false
                 }
             })

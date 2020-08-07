@@ -8,15 +8,20 @@ import android.view.ViewGroup
 import com.abilat01.stellweidingv20.R
 
 
-class BaseFragment : Fragment() {
+class BaseFragment ( val layout: Int) : Fragment() {
+
+    private lateinit var mRootView: View
 
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_base, container, false)
+        mRootView = inflater.inflate(layout, container, false)
+        return mRootView
     }
 
+    override fun onStart() {
+        super.onStart()
+    }
 }

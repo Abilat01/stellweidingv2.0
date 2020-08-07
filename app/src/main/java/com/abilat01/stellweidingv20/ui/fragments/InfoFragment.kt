@@ -6,16 +6,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.abilat01.stellweidingv20.R
+import com.abilat01.stellweidingv20.databinding.FragmentInfoBinding
 
 
-class InfoFragment : Fragment() {
+class InfoFragment : Fragment(R.layout.fragment_info) {
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_info, container, false)
+   private lateinit var mBinding: FragmentInfoBinding
+
+    override fun onStart() {
+        super.onStart()
     }
-
 }
