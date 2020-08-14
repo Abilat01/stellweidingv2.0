@@ -25,3 +25,4 @@ class BaseFragment ( val layout: Int) : Fragment() {
         super.onStart()
     }
 }
+
